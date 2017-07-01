@@ -43,7 +43,7 @@ All features are available in C++ and Blueprint. this plugin automatic process a
 # Install
 
 1、Copy Plugins folder to your project root folder, double click to open your game project as usual, the engine will 
- notify you to comile the plugin, confirm to compile the plugin, wait several minutes(3-5), the editor will lauched.
+ notify you to compile the plugin, confirm to compile the plugin, wait several minutes(3-5), the editor will lauched.
 
 
 # Usage
