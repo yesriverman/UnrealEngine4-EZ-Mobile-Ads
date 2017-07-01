@@ -48,5 +48,5 @@ All features are available in C++ and Blueprint.
       
 3、In blueprint Editor,  just call function "PlayRewardedVideo",  setting the ad platform Unity . 
        you can add custom event to process after user complete watched the ads video.
-	   [very easy!!!](docs/call.PNG)
+	  ![very easy!!!](docs/call.PNG)
 	   
