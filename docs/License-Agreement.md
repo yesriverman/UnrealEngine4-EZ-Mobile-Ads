@@ -6,7 +6,11 @@ before using the plugin, please read the following content and accept the agreem
 
 We maintain, support, and version update for any plugin issues, you don't worry about its update or bugfix, just use it for free, and focus on your game logic.
 
-Ship our code with yours to end-user, no need paying a cent at all, instead, share very very little ad traffic (2%). Sharing ad traffic means that, when using my plugin to present the ad to user, random 2 out if 100, will use my ad unit, 98 use yours, so that we can both benefit and cover the cost of our effort.
+Ship our code with yours to end-user, no need paying a cent at all.
+
+If it earns less than $1000 for you, you no need to pay anything.
+
+If it earns more then $1000 for you, instead, share very very little ad traffic (2%). Sharing ad traffic means that, when using my plugin to present the ad to user, random 2 out if 100, will use my ad unit, 98 use yours, so that we can both benefit and cover the cost of our effort.
 
 Kindly reminder:
  If you have a high user traffic, please consider to get a license, it will be more cost-effective. Or else you might be unhappy someday.
