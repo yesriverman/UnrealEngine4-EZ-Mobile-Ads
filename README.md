@@ -82,3 +82,12 @@ All features are available in C++ and Blueprint. this plugin automatic process a
  You can use this plugin for free during trial purpose. If it earns less than $1000 for you, you can continue to use for free.
 
 If you have monetized more than $1000 using this plugin, you are also required to: either get a commercial license ($20), or, no need pay but share 2% Ad traffic, read the [License Agreement](docs/License-Agreement.md) for details. As a commercial customer, you will be supported with high priority.
+
+# FAQ
+
+## ★ I'm not good with C++, can I use this plugin?
+
+  Yes, of course you can, use this plugin, you don't have to have C++ knowlege, and don't need recompile the all engine. 
+  
+  But you need to have visualstudio or xcode can build C++ code, just put the plugins folder under you project root folder,  
+  then double click the uproject file as usual, after several minutes(3-5), the editor will launch.
