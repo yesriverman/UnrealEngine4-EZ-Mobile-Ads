@@ -70,3 +70,13 @@ All features are available in C++ and Blueprint. this plugin automatic process a
 	
 ★ Want maximize fill rate and increase monetization?
 	![ScreenShot](docs/max.PNG)
+	
+	
+# Support Email
+  
+  feixuwu@outlook.com
+  
+# License
+ You can use this plugin for free during trial purpose. If it earns less than $1000 for you, you can continue to use for free.
+
+If you have monetized more than $1000 using this plugin, you are also required to: either get a commercial license ($20), or, no need pay but share 2% Ad traffic, read the [License Agreement](docs/License-Agreement.md) for details. As a commercial customer, you will be supported with high priority.
