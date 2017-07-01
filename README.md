@@ -54,27 +54,19 @@ All features are available in C++ and Blueprint. this plugin automatic process a
       
 3、In blueprint Editor, when you want show show the ads, just call function "PlayRewardedVideo",  setting the ad platform Unity . 
        you can add custom event to process after user complete watched the ads video.
-	  ![ScreenShot](docs/call.PNG)
+	![ScreenShot](docs/call.PNG)
 
 	  
 # Other ShowCase
 ★ Want show Banner?
-
-     ![ScreenShot](docs/banner.PNG)
+	![ScreenShot](docs/banner.PNG)
 
 ★ Want show interstitial?
-
-     ![ScreenShot](docs/interstitial.PNG)
+	![ScreenShot](docs/interstitial.PNG)
 	 
-★ Want reward player with confiure coins from chartBoost?
-     
-    ![ScreenShot](docs/chartboost.PNG)
+★ Want reward player with confiure coins from chartBoost?  
+	![ScreenShot](docs/chartboost.PNG)
 	
 	
 ★ Want maximize fill rate and increase monetization?
-
-    ![ScreenShot](docs/max.PNG)
-	
-	
-    
-	   
+	![ScreenShot](docs/max.PNG)
