@@ -3,15 +3,16 @@ One line code(or blueprint) Integrates Google AdMob mediation system and other a
 
 All In One Mobile Ads help you easy integrates multiple ad networks for your game both Android and IOS same code, 
 By use multiple ad networks, it will  help you maximize fill rate and increase monetization.
-All features are available in C++ and Blueprint.
-
+All features are available in C++ and Blueprint. this plugin automatic process ads reload and other detail, so
+ you can easy use juse call when you need.
 
 # FEATURES: 
 ★ 4 best game ad networks supported (more coming soon).
 
 ★  all ad  networks  can enable and disable in editor setting.
 
-★  extremely easy  integrates just one line c++ code or blueprint for both IOS and Android.
+★  extremely easy  integrates just one line c++ code or blueprint for both IOS and Android. plugin automatic process ads reload
+  and other detail.
 
 ★ support via e-mail
 
@@ -37,6 +38,11 @@ All features are available in C++ and Blueprint.
 
 ★ Unity
 
+# Install
+
+1、Copy Plugins folder to your project and compile the editor.
+
+
 # Usage
   you can simply run the demo project for test, to integrates your own project, juse few steps:
   
@@ -46,7 +52,29 @@ All features are available in C++ and Blueprint.
       open project editor and find Unity Setting,  fill your application id for both Android and IOS.
       ![ScreenShot](docs/config.PNG)
       
-3、In blueprint Editor,  just call function "PlayRewardedVideo",  setting the ad platform Unity . 
+3、In blueprint Editor, when you want show show the ads, just call function "PlayRewardedVideo",  setting the ad platform Unity . 
        you can add custom event to process after user complete watched the ads video.
 	  ![very easy!!!](docs/call.PNG)
+
+	  
+# Other ShowCase
+★ Want show Banner?
+
+     ![very easy!!!](docs/banner.PNG)
+
+★ Want show interstitial?
+
+     ![very easy!!!](docs/interstitial.PNG)
+	 
+★ Want reward player with confiure coins from chartBoost?
+     
+    ![very easy!!!](docs/chartboost.PNG)
+	
+	
+★ Want maximize fill rate and increase monetization?
+
+    ![very easy!!!](docs/max.PNG)
+	
+	
+    
 	   
