@@ -44,8 +44,9 @@ All features are available in C++ and Blueprint.
 
 2、Want Unity Ads? easy!!
       open project editor and find Unity Setting,  fill your application id for both Android and IOS.
-      
+      [just like this](docs/config.PNG)
       
 3、In blueprint Editor,  just call function "PlayRewardedVideo",  setting the ad platform Unity . 
        you can add custom event to process after user complete watched the ads video.
+	   [very easy!!!](docs/call.PNG)
 	   
