@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Admob plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- init section is always evaluated once per architecture -->
+	<init>
+		<log text="ChartBoost Android init"/>
+		
+		<!-- get packaging for Admob from ini and reset it if architecture not supported -->
+		<setBoolFromProperty result="bEnabled" ini="Engine" section="/Script/AdCollectionEditor.ChartBoostSetting" property="bIsAndroidEnabled" default="false"/>
+		<setStringFromProperty result="AppId" ini="Engine" section="/Script/AdCollectionEditor.ChartBoostSetting" property="AndroidAppId" default="0"/>
+    <setStringFromProperty result="Signature" ini="Engine" section="/Script/AdCollectionEditor.ChartBoostSetting" property="AndroidSignature" default="0"/>
+		<dumpvars/>
+	</init>
+	
+	<!-- optional files or directories to copy to Intermediate/Android/APK -->
+	<resourceCopies>
+	</resourceCopies>
+	
+	<!-- Files to copy before the build so they can be used in the build -->
+	<prebuildCopies>
+
+	</prebuildCopies>
+	
+	<!-- AAR dependencies -->
+	<AARImports>
+
+	</AARImports>
+
+	<!-- optional updates applied to AndroidManifest.xml -->
+	<androidManifestUpdates>
+		<if condition="bEnabled">
+			<true>
+
+        <setElement result="AppIdMetadata" value="meta-data"/>
+        <addAttribute tag="$AppIdMetadata" name="android:name" value="com.epicgames.ue4.ChartBoost.AppId"/>
+        <addAttribute tag="$AppIdMetadata" name="android:value" value="\ $S(AppId)"/>
+        <addElement tag="application" name="AppIdMetadata"/>
+
+        <setElement result="AppSignatureMetadata" value="meta-data"/>
+        <addAttribute tag="$AppSignatureMetadata" name="android:name" value="com.epicgames.ue4.ChartBoost.Signature"/>
+        <addAttribute tag="$AppSignatureMetadata" name="android:value" value="\ $S(Signature)"/>
+        <addElement tag="application" name="AppSignatureMetadata"/>
+
+
+        <setElement result="AdChartBoostActivity" value="activity"/>
+        <addAttribute tag="$AdChartBoostActivity" name="android:name" value="com.chartboost.sdk.CBImpressionActivity"/>
+        <addAttribute tag="$AdChartBoostActivity" name="android:excludeFromRecents" value="true"/>
+        <addAttribute tag="$AdChartBoostActivity" name="android:hardwareAccelerated" value="true"/>
+        <addAttribute tag="$AdChartBoostActivity" name="android:theme" value="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        <addAttribute tag="$AdChartBoostActivity" name="android:configChanges" value="keyboardHidden|orientation|screenSize"/>
+        <addElement tag="application" name="AdChartBoostActivity"/>
+
+
+
+        <!-- Add permissions -->
+				<addPermission android:name="android.permission.INTERNET" />
+        <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+        <addPermission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			</true>
+		</if>
+	</androidManifestUpdates>
+
+	<!-- optional additions to proguard -->
+	<proguardAdditions>
+		<if condition="bEnabled">
+			<true>
+			</true>
+		</if>
+	</proguardAdditions>
+
+	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 
+	<prebuildCopies>
+	</prebuildCopies> -->
+
+	<!-- optional additions to the GameActivity imports in GameActivity.java -->
+	<gameActivityImportAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // ChartBoost imports
+          import com.ads.util.ChartBoost;
+        </insert>
+			</true>
+		</if>
+	</gameActivityImportAdditions>
+
+	<!-- optional additions to the GameActivity class in GameActivity.java -->
+	<gameActivityClassAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin ChartBoost gameActivityClassAdditions
+          private ChartBoost chartBoostInstance;
+
+          public void AndroidThunkJava_ChartBoost_PlayRewardedVideo()
+          {
+          if (chartBoostInstance != null)
+          {
+          chartBoostInstance.PlayRewardedVideo();
+          }
+          }
+
+          public void AndroidThunkJava_ChartBoost_ShowInterstitialAds()
+          {
+          if (chartBoostInstance != null)
+          {
+          chartBoostInstance.ShowInterstitalAds();
+          }
+          }
+
+          public boolean AndroidThunkJava_ChartBoost_InterstitialReady()
+          {
+          if(chartBoostInstance != null)
+          {
+          return chartBoostInstance.IsInterstitialReady();
+          }
+
+          return false;
+          }
+
+          public boolean AndroidThunkJava_ChartBoost_RewardedVideoReady()
+          {
+          if(chartBoostInstance != null)
+          {
+          return chartBoostInstance.IsRewardedVideoReady();
+          }
+
+          return false;
+          }
+
+          // End ChartBoost gameActivityClassAdditions
+        </insert>
+			</true>
+		</if>
+	</gameActivityClassAdditions>
+	
+	<!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
+	<gameActivityReadMetadataAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+					// Facebook gameActivityReadMetadataAdditions
+				</insert>
+			</true>
+		</if>
+	</gameActivityReadMetadataAdditions>
+	
+	<!-- optional additions to GameActivity onCreate in GameActivity.java -->
+	<gameActivityOnCreateAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin ChartBoost onCreate
+          try
+          {
+          Log.debug("ChartBoost:Ready Create!");
+          final String app_id = _bundle.getString("com.epicgames.ue4.ChartBoost.AppId");
+          final String app_signature = _bundle.getString("com.epicgames.ue4.ChartBoost.Signature");
+          chartBoostInstance = new ChartBoost(this, app_id, app_signature);
+
+
+          Log.debug("ChartBoost:InitFinish:" + app_id);
+          }
+          catch (Exception e) {
+          e.printStackTrace();
+          }
+
+          // End ChartBoost onCreate
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnCreateAdditions>
+
+	<!-- optional additions to GameActivity onDestroy in GameActivity.java-->
+	<gameActivityOnDestroyAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin ChartBoost onDestroy
+          if(chartBoostInstance != null)
+          {
+          chartBoostInstance.onDestroy();
+          }
+
+          // End ChartBoost onDestroy
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnDestroyAdditions>
+	
+	<!-- optional additions to GameActivity onStart in GameActivity.java -->
+	<gameActivityOnStartAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin ChartBoost onStart
+          if(chartBoostInstance != null)
+          {
+          chartBoostInstance.OnStart();
+          }
+          // End ChartBoost onStart
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnStartAdditions>
+
+	<!-- optional additions to GameActivity onStop in GameActivity.java -->
+	<gameActivityOnStopAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin ChartBoost onStop
+          if(chartBoostInstance != null)
+          {
+          chartBoostInstance.onStop();
+          }
+          // End ChartBoost onStop
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnStopAdditions>
+
+	<!-- optional additions to GameActivity onPause in GameActivity.java -->
+	<gameActivityOnPauseAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin ChartBoost onPause
+          if(chartBoostInstance != null)
+          {
+          chartBoostInstance.onPause();
+          }
+          // End ChartBoost onPause
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnPauseAdditions>
+
+	<!-- optional additions to GameActivity onResume in GameActivity.java -->
+	<gameActivityOnResumeAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin ChartBoost onResume
+          if(chartBoostInstance != null)
+          {
+          chartBoostInstance.onResume();
+          }
+          // End ChartBoost onResume
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnResumeAdditions>
+
+	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
+	<gameActivityOnActivityResultAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Facebook onActivityResult
+	//if (facebookLogin != null)
+	//{
+	//	facebookLogin.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+	//}
+	// End Facebook onActivityResult
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnActivityResultAdditions>
+
+	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
+	<soLoadLibrary>
+	</soLoadLibrary>
+</root>

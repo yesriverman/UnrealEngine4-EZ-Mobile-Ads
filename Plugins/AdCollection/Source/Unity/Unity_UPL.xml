@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Admob plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- init section is always evaluated once per architecture -->
+	<init>
+		<log text="Unity Android init"/>
+		
+		<!-- get packaging for Admob from ini and reset it if architecture not supported -->
+		<setBoolFromProperty result="bEnabled" ini="Engine" section="/Script/AdCollectionEditor.UnitySetting" property="bIsAndroidEnabled" default="false"/>
+		<setStringFromProperty result="AppId" ini="Engine" section="/Script/AdCollectionEditor.UnitySetting" property="AndroidAppId" default="0"/>
+		<dumpvars/>
+	</init>
+	
+	<!-- optional files or directories to copy to Intermediate/Android/APK -->
+	<resourceCopies>
+	</resourceCopies>
+	
+	<!-- Files to copy before the build so they can be used in the build -->
+	<prebuildCopies>
+		<if condition="bEnabled">
+			<true>
+				<log text="Copying Unity Java files to staging"/>
+				<copyDir src="$S(PluginDir)/ThirdParty/Android/Java"
+					dst = "$S(BuildDir)/src/com/epicgames/ue4" /> 	
+			</true>
+		</if>
+
+    <if condition="bEnabled">
+      <true>
+        <log text="Copying Unity Libs files to staging"/>
+        <copyDir src="$S(PluginDir)/ThirdParty/Android/libs"
+					dst = "$S(BuildDir)/libs" />
+      </true>
+    </if>
+	</prebuildCopies>
+	
+	<!-- AAR dependencies -->
+	<AARImports>
+		<if condition="bEnabled">
+			<true>
+				<insertValue value="repository $S(PluginDir)/ThirdParty/Android/libs"/>
+				<insertNewline/>
+				<insertValue value="com.unity3d.ads,adunit,2.1.0" />
+				<insertNewline/>
+			</true>
+		</if>
+	</AARImports>
+
+	<!-- optional updates applied to AndroidManifest.xml -->
+	<androidManifestUpdates>
+		<if condition="bEnabled">
+			<true>
+
+        <setElement result="AppIdMetadata" value="meta-data"/>
+        <addAttribute tag="$AppIdMetadata" name="android:name" value="com.epicgames.ue4.Unity.AppId"/>
+        <addAttribute tag="$AppIdMetadata" name="android:value" value="\ $S(AppId)"/>
+        <addElement tag="application" name="AppIdMetadata"/>
+
+
+        <setElement result="AdUnitActivity" value="activity"/>
+        <addAttribute tag="$AdUnitActivity" name="android:name" value="com.unity3d.ads.adunit.AdUnitActivity"/>
+        <addAttribute tag="$AdUnitActivity" name="android:configChanges" value="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"/>
+        <addAttribute tag="$AdUnitActivity" name="android:hardwareAccelerated" value="true"/>
+        <addAttribute tag="$AdUnitActivity" name="android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <addElement tag="application" name="AdUnitActivity"/>
+
+
+        <setElement result="AdUnitSoftwareActivity" value="activity"/>
+        <addAttribute tag="$AdUnitSoftwareActivity" name="android:name" value="com.unity3d.ads.adunit.AdUnitSoftwareActivity"/>
+        <addAttribute tag="$AdUnitSoftwareActivity" name="android:configChanges" value="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"/>
+        <addAttribute tag="$AdUnitSoftwareActivity" name="android:hardwareAccelerated" value="false"/>
+        <addAttribute tag="$AdUnitSoftwareActivity" name="android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <addElement tag="application" name="AdUnitSoftwareActivity"/>
+
+
+        <!-- Add permissions -->
+				<addPermission android:name="android.permission.INTERNET" />
+        <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+        <addPermission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			</true>
+		</if>
+	</androidManifestUpdates>
+
+	<!-- optional additions to proguard -->
+	<proguardAdditions>
+		<if condition="bEnabled">
+			<true>
+			</true>
+		</if>
+	</proguardAdditions>
+
+	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 
+	<prebuildCopies>
+	</prebuildCopies> -->
+
+	<!-- optional additions to the GameActivity imports in GameActivity.java -->
+	<gameActivityImportAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Unity imports
+          import com.ads.util.Unity;
+        </insert>
+			</true>
+		</if>
+	</gameActivityImportAdditions>
+
+	<!-- optional additions to the GameActivity class in GameActivity.java -->
+	<gameActivityClassAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Unity gameActivityClassAdditions
+          private Unity unityInstance;
+
+          public void AndroidThunkJava_Unity_PlayRewardedVideo()
+          {
+          if (unityInstance != null)
+          {
+          unityInstance.PlayRewardVideo();
+          }
+          }
+
+          public boolean AndroidThunkJava_Unity_RewardedVideoReady()
+          {
+          if(unityInstance != null)
+          {
+          return unityInstance.IsRewardedVideoReady();
+          }
+          
+          return false;
+          }
+
+
+
+          // End Unity gameActivityClassAdditions
+        </insert>
+			</true>
+		</if>
+	</gameActivityClassAdditions>
+	
+	<!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
+	<gameActivityReadMetadataAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+					// Facebook gameActivityReadMetadataAdditions
+				</insert>
+			</true>
+		</if>
+	</gameActivityReadMetadataAdditions>
+	
+	<!-- optional additions to GameActivity onCreate in GameActivity.java -->
+	<gameActivityOnCreateAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Unity onCreate
+          try
+          {
+          Log.debug("Unity:Ready Create!");
+          final String app_id = _bundle.getString("com.epicgames.ue4.Unity.AppId");
+          unityInstance = new Unity(this, app_id);
+
+
+          Log.debug("Unity:InitFinish:" + app_id);
+          }
+          catch (Exception e) {
+          e.printStackTrace();
+          }
+
+          // End Unity onCreate
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnCreateAdditions>
+
+	<!-- optional additions to GameActivity onDestroy in GameActivity.java-->
+	<gameActivityOnDestroyAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Unity onDestroy
+          
+          // End Unity onDestroy
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnDestroyAdditions>
+	
+	<!-- optional additions to GameActivity onStart in GameActivity.java -->
+	<gameActivityOnStartAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Unity onStart
+	// End Unity onStart
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnStartAdditions>
+
+	<!-- optional additions to GameActivity onStop in GameActivity.java -->
+	<gameActivityOnStopAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Unity onStop
+	// End Unity onStop
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnStopAdditions>
+
+	<!-- optional additions to GameActivity onPause in GameActivity.java -->
+	<gameActivityOnPauseAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Unity onPause
+
+          // End Unity onPause
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnPauseAdditions>
+
+	<!-- optional additions to GameActivity onResume in GameActivity.java -->
+	<gameActivityOnResumeAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Unity onResume
+
+          // End Unity onResume
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnResumeAdditions>
+
+	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
+	<gameActivityOnActivityResultAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Facebook onActivityResult
+	//if (facebookLogin != null)
+	//{
+	//	facebookLogin.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+	//}
+	// End Facebook onActivityResult
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnActivityResultAdditions>
+
+	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
+	<soLoadLibrary>
+	</soLoadLibrary>
+</root>

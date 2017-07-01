@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Admob plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- init section is always evaluated once per architecture -->
+	<init>
+		<log text="Admob Android init"/>
+		
+		<!-- get packaging for Admob from ini and reset it if architecture not supported -->
+		<setBoolFromProperty result="bEnabled" ini="Engine" section="/Script/AdCollectionEditor.AdMobSetting" property="bAndroidEnabled" default="false"/>
+		<setStringFromProperty result="AppId" ini="Engine" section="/Script/AdCollectionEditor.AdMobSetting" property="AndroidAppId" default="0"/>
+    <setStringFromProperty result="BannerAdUnit" ini="Engine" section="/Script/AdCollectionEditor.AdMobSetting" property="AndroidBannerUnit" default="0"/>
+    <setStringFromProperty result="InterstitialAdUnit" ini="Engine" section="/Script/AdCollectionEditor.AdMobSetting" property="AndroidInterstitialUnit" default="0"/>
+    <setStringFromProperty result="RewardedVideoAdUnit" ini="Engine" section="/Script/AdCollectionEditor.AdMobSetting" property="AndroidRewardedVideoAdUnit" default="0"/>
+		<dumpvars/>
+	</init>
+	
+	<!-- optional files or directories to copy to Intermediate/Android/APK -->
+	<resourceCopies>
+	</resourceCopies>
+	
+	<!-- Files to copy before the build so they can be used in the build -->
+	<prebuildCopies>
+		<if condition="bEnabled">
+			<true>
+				<log text="Copying Admob Java files to staging"/>
+				<copyDir src="$S(PluginDir)/ThirdParty/Android/Java"
+					dst = "$S(BuildDir)/src/com/epicgames/ue4" />
+			</true>
+		</if>
+
+    <if condition="bEnabled">
+      <true>
+        <log text="Copying Admob Libs files to staging"/>
+        <copyDir src="$S(PluginDir)/ThirdParty/Android/libs"
+					dst = "$S(BuildDir)/libs" />
+      </true>
+    </if>
+	</prebuildCopies>
+	
+	<!-- AAR dependencies -->
+	<!-- <AARImports>
+		<if condition="bEnabled">
+			<true>
+				<insertValue value="repository $S(PluginDir)/ThirdParty/Android/NotForLicensees"/>
+				<insertNewline/>
+				<insertValue value="FacebookSDK,facebook-android-sdk,4.19.0" />
+				<insertNewline/>
+			</true>
+		</if>
+	</AARImports> -->
+
+	<!-- optional updates applied to AndroidManifest.xml -->
+	<androidManifestUpdates>
+		<if condition="bEnabled">
+			<true>
+
+        <setElement result="AppIdMetadata" value="meta-data"/>
+        <addAttribute tag="$AppIdMetadata" name="android:name" value="com.epicgames.ue4.AdMob.AppId"/>
+        <addAttribute tag="$AppIdMetadata" name="android:value" value="$S(AppId)"/>
+        <addElement tag="application" name="AppIdMetadata"/>
+        
+        <setElement result="BannerUnitMetadata" value="meta-data"/>
+        <addAttribute tag="$BannerUnitMetadata" name="android:name" value="com.epicgames.ue4.AdMob.BannerAdUnit"/>
+        <addAttribute tag="$BannerUnitMetadata" name="android:value" value="$S(BannerAdUnit)"/>
+        <addElement tag="application" name="BannerUnitMetadata"/>
+        
+        
+        <setElement result="InterstitialUnitMetadata" value="meta-data"/>
+        <addAttribute tag="$InterstitialUnitMetadata" name="android:name" value="com.epicgames.ue4.AdMob.InterstitialAdUnit"/>
+        <addAttribute tag="$InterstitialUnitMetadata" name="android:value" value="$S(InterstitialAdUnit)"/>
+        <addElement tag="application" name="InterstitialUnitMetadata"/>
+
+
+        <setElement result="RewardedVideoMetadata" value="meta-data"/>
+        <addAttribute tag="$RewardedVideoMetadata" name="android:name" value="com.epicgames.ue4.AdMob.RewardedVideoAdUnit"/>
+        <addAttribute tag="$RewardedVideoMetadata" name="android:value" value="$S(RewardedVideoAdUnit)"/>
+        <addElement tag="application" name="RewardedVideoMetadata"/>
+
+
+        <setElement result="AdActivity" value="activity"/>
+        <addAttribute tag="$AdActivity" name="android:name" value="com.google.android.gms.ads.AdActivity"/>
+        <addAttribute tag="$AdActivity" name="android:configChanges" value="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <addAttribute tag="$AdActivity" name="android:theme" value="@android:style/Theme.Translucent"/>
+        <addElement tag="application" name="AdActivity"/>
+
+        <!-- Add permissions -->
+				<addPermission android:name="android.permission.INTERNET" />
+        <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+        <addPermission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			</true>
+		</if>
+	</androidManifestUpdates>
+
+	<!-- optional additions to proguard -->
+	<proguardAdditions>
+		<if condition="bEnabled">
+			<true>
+			</true>
+		</if>
+	</proguardAdditions>
+
+	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 
+	<prebuildCopies>
+	</prebuildCopies> -->
+
+	<!-- optional additions to the GameActivity imports in GameActivity.java -->
+	<gameActivityImportAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // AdMob imports
+          import com.ads.util.AdMob;
+        </insert>
+			</true>
+		</if>
+	</gameActivityImportAdditions>
+
+	<!-- optional additions to the GameActivity class in GameActivity.java -->
+	<gameActivityClassAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin AdMob gameActivityClassAdditions
+          private AdMob adMobInstance;
+
+          public void AndroidThunkJava_AdMob_ShowBanner(boolean bShowOnBottomOfScreen)
+          {
+          if (adMobInstance != null)
+          {
+          adMobInstance.ShowBanner(bShowOnBottomOfScreen );
+          }
+          }
+
+          public void AndroidThunkJava_AdMob_PlayRewardedVideo()
+          {
+          if (adMobInstance != null)
+          {
+          adMobInstance.playRewardAds();
+          }
+          }
+
+          public void AndroidThunkJava_AdMob_ShowInterstitialAd()
+          {
+          if (adMobInstance != null)
+          {
+          adMobInstance.ShowInterstitialAd();
+          }
+          }
+
+          public void AndroidThunkJava_AdMob_HideBanner()
+          {
+          if (adMobInstance != null)
+          {
+          adMobInstance.HideAdBanner();
+          }
+          }
+          
+          public boolean AndroidThunkJava_AdMob_BannerReady()
+          {
+            if(adMobInstance != null)
+            {
+              return adMobInstance.IsBannerReady();
+            }
+            return false;
+          }
+          
+          public boolean AndroidThunkJava_AdMob_InterstitialReady()
+          {
+            if(adMobInstance != null)
+            {
+              return adMobInstance.IsInterstitialReady();
+            }
+            return false;
+          }
+          
+          public boolean AndroidThunkJava_AdMob_RewardedVideoReady()
+          {
+            if(adMobInstance != null)
+            {
+              return adMobInstance.IsRewardedVideoReady();
+            }
+            return false;
+          }
+
+          // End AdMob gameActivityClassAdditions
+        </insert>
+			</true>
+		</if>
+	</gameActivityClassAdditions>
+	
+	<!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
+	<gameActivityReadMetadataAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+					// Facebook gameActivityReadMetadataAdditions
+				</insert>
+			</true>
+		</if>
+	</gameActivityReadMetadataAdditions>
+	
+	<!-- optional additions to GameActivity onCreate in GameActivity.java -->
+	<gameActivityOnCreateAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin AdMob onCreate
+          try
+          {
+          Log.debug("AdMob:Ready Create!");
+          adMobInstance = new AdMob(this, activityLayout);
+
+          final String app_id = _bundle.getString("com.epicgames.ue4.AdMob.AppId");
+          final String adBannerUnit = _bundle.getString("com.epicgames.ue4.AdMob.BannerAdUnit");
+          final String interstitialUnit = _bundle.getString("com.epicgames.ue4.AdMob.InterstitialAdUnit");
+          final String adRewardedUnit = _bundle.getString("com.epicgames.ue4.AdMob.RewardedVideoAdUnit");
+
+          adMobInstance.InitAdMob(app_id, adBannerUnit, interstitialUnit, adRewardedUnit);
+          Log.debug("AdMob:InitFinish:" + app_id + " " + adBannerUnit + " " + interstitialUnit + " " + adRewardedUnit);
+          }
+          catch (Exception e) {
+          e.printStackTrace();
+          }
+
+          // End AdMob onCreate
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnCreateAdditions>
+
+	<!-- optional additions to GameActivity onDestroy in GameActivity.java-->
+	<gameActivityOnDestroyAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin AdMob onDestroy
+          if (adMobInstance != null)
+          {
+          adMobInstance.OnDestroy();
+          }
+          // End AdMob onDestroy
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnDestroyAdditions>
+	
+	<!-- optional additions to GameActivity onStart in GameActivity.java -->
+	<gameActivityOnStartAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin AdMob onStart
+	// End AdMob onStart
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnStartAdditions>
+
+	<!-- optional additions to GameActivity onStop in GameActivity.java -->
+	<gameActivityOnStopAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin AdMob onStop
+	// End AdMob onStop
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnStopAdditions>
+
+	<!-- optional additions to GameActivity onPause in GameActivity.java -->
+	<gameActivityOnPauseAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin AdMob onPause
+          if (adMobInstance != null)
+          {
+          adMobInstance.OnPause();
+          }
+          // End AdMob onPause
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnPauseAdditions>
+
+	<!-- optional additions to GameActivity onResume in GameActivity.java -->
+	<gameActivityOnResumeAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin AdMob onResume
+          if (adMobInstance != null)
+          {
+          adMobInstance.OnResume();
+          }
+          // End AdMob onResume
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnResumeAdditions>
+
+	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
+	<gameActivityOnActivityResultAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Facebook onActivityResult
+	//if (facebookLogin != null)
+	//{
+	//	facebookLogin.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+	//}
+	// End Facebook onActivityResult
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnActivityResultAdditions>
+
+	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
+	<soLoadLibrary>
+	</soLoadLibrary>
+</root>

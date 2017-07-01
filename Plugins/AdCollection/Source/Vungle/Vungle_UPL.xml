@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Vungle plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- init section is always evaluated once per architecture -->
+	<init>
+		<log text="VungleSDK Android init"/>
+		
+		<!-- get packaging for Vungle from ini and reset it if architecture not supported -->
+		<setBoolFromProperty result="bEnabled" ini="Engine" section="/Script/AdCollectionEditor.VungleSetting" property="bAndroidEnabled" default="false"/>
+		<setStringFromProperty result="AppId" ini="Engine" section="/Script/AdCollectionEditor.VungleSetting" property="AndroidAppId" default="0"/>
+		<dumpvars/>
+	</init>
+	
+	<!-- optional files or directories to copy to Intermediate/Android/APK -->
+	<resourceCopies>
+	</resourceCopies>
+	
+	<!-- Files to copy before the build so they can be used in the build -->
+	<prebuildCopies>
+		<if condition="bEnabled">
+			<true>
+				<log text="Copying Vungle Java files to staging"/>
+				<copyDir src="$S(PluginDir)/ThirdParty/Android/Java"
+					dst = "$S(BuildDir)/src/com/epicgames/ue4" /> 	
+			</true>
+		</if>
+
+    <!-- 
+    <if condition="bEnabled">
+      <true>
+        <log text="Copying Vungle Libs files to staging"/>
+        <copyDir src="$S(PluginDir)/ThirdParty/Android/libs"
+					dst = "$S(BuildDir)/libs" />
+      </true>
+    </if>
+    -->
+	</prebuildCopies>
+	
+	<!-- AAR dependencies -->
+	<!-- <AARImports>
+		<if condition="bEnabled">
+			<true>
+				<insertValue value="repository $S(PluginDir)/ThirdParty/Android/NotForLicensees"/>
+				<insertNewline/>
+				<insertValue value="FacebookSDK,facebook-android-sdk,4.19.0" />
+				<insertNewline/>
+			</true>
+		</if>
+	</AARImports> -->
+
+	<!-- optional updates applied to AndroidManifest.xml -->
+	<androidManifestUpdates>
+		<if condition="bEnabled">
+			<true>
+        <setElement result="VungleCustomActivity" value="activity" />
+        <addAttribute tag="$VungleCustomActivity" name="android:name" value="com.vungle.publisher.VideoFullScreenAdActivity" />
+        <addAttribute tag="$VungleCustomActivity" name="android:configChanges" value="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize" />
+        <addAttribute tag="$VungleCustomActivity" name="android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <addElement tag="application" name="VungleCustomActivity" />
+
+
+        <setElement result="VungleCustomActivity2" value="activity" />
+        <addAttribute tag="$VungleCustomActivity2" name="android:name" value="com.vungle.publisher.MraidFullScreenAdActivity" />
+        <addAttribute tag="$VungleCustomActivity2" name="android:configChanges" value="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize" />
+        <addAttribute tag="$VungleCustomActivity2" name="android:theme" value="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <addElement tag="application" name="VungleCustomActivity2" />
+
+
+        
+        <setElement result="AppIdMetadata" value="meta-data"/>
+        <addAttribute tag="$AppIdMetadata" name="android:name" value="com.epicgames.ue4.Vungle.AppId"/>
+        <addAttribute tag="$AppIdMetadata" name="android:value" value="$S(AppId)"/>
+        <addElement tag="application" name="AppIdMetadata"/>
+        
+				<!-- Add permissions -->
+				<addPermission android:name="android.permission.INTERNET" />
+        <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+        <addPermission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			</true>
+		</if>
+	</androidManifestUpdates>
+
+	<!-- optional additions to proguard -->
+	<proguardAdditions>
+		<if condition="bEnabled">
+			<true>
+			</true>
+		</if>
+	</proguardAdditions>
+
+	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 
+	<prebuildCopies>
+	</prebuildCopies> -->
+
+	<!-- optional additions to the GameActivity imports in GameActivity.java -->
+	<gameActivityImportAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Vungle imports
+          import com.ads.util.Vungle;
+        </insert>
+			</true>
+		</if>
+	</gameActivityImportAdditions>
+
+	<!-- optional additions to the GameActivity class in GameActivity.java -->
+	<gameActivityClassAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Vungle gameActivityClassAdditions
+          private Vungle vungleInstance;
+
+          public boolean AndroidThunkJava_Vungle_PlayAd()
+          {
+          if (vungleInstance != null)
+          {
+          return vungleInstance.PlayAd();
+          }
+
+          return false;
+          }
+
+          public boolean AndroidThunkJava_Vungle_Ready()
+          {
+          if (vungleInstance != null)
+          {
+          return vungleInstance.IsRewardedVideoReady();
+          }
+          
+          return false;
+          }
+
+          // End Vungle gameActivityClassAdditions
+        </insert>
+			</true>
+		</if>
+	</gameActivityClassAdditions>
+	
+	<!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
+	<gameActivityReadMetadataAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+					// Facebook gameActivityReadMetadataAdditions
+				</insert>
+			</true>
+		</if>
+	</gameActivityReadMetadataAdditions>
+	
+	<!-- optional additions to GameActivity onCreate in GameActivity.java -->
+	<gameActivityOnCreateAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Vungle onCreate
+          try
+          {
+          Log.debug("Vungle:Ready Create!");
+          vungleInstance = new Vungle(this);
+
+          final String app_id = _bundle.getString("com.epicgames.ue4.Vungle.AppId");
+
+          vungleInstance.InitVungle(app_id);
+          Log.debug("Vungle:InitFinish:" + app_id);
+          }
+          catch (Exception e) {
+          e.printStackTrace();
+          }
+
+          // End Vungle onCreate
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnCreateAdditions>
+
+	<!-- optional additions to GameActivity onDestroy in GameActivity.java-->
+	<gameActivityOnDestroyAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Vungle onDestroy
+          //if (vungleInstance != null)
+          //{
+          //  vungleInstance = null;
+          //}
+          // End Vungle onDestroy
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnDestroyAdditions>
+	
+	<!-- optional additions to GameActivity onStart in GameActivity.java -->
+	<gameActivityOnStartAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Vungle onStart
+	// End Vungle onStart
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnStartAdditions>
+
+	<!-- optional additions to GameActivity onStop in GameActivity.java -->
+	<gameActivityOnStopAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Vungle onStop
+	// End Vungle onStop
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnStopAdditions>
+
+	<!-- optional additions to GameActivity onPause in GameActivity.java -->
+	<gameActivityOnPauseAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Vungle onPause
+          if (vungleInstance != null)
+          {
+          vungleInstance.OnPause();
+          }
+          // End Vungle onPause
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnPauseAdditions>
+
+	<!-- optional additions to GameActivity onResume in GameActivity.java -->
+	<gameActivityOnResumeAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+          // Begin Vungle onResume
+          if (vungleInstance != null)
+          {
+          vungleInstance.onResume();
+          }
+          // End Vungle onResume
+        </insert>
+			</true>
+		</if>
+	</gameActivityOnResumeAdditions>
+
+	<!-- optional additions to GameActivity onActivityResult in GameActivity.java -->
+	<gameActivityOnActivityResultAdditions>
+		<if condition="bEnabled">
+			<true>
+				<insert>
+	// Begin Facebook onActivityResult
+	//if (facebookLogin != null)
+	//{
+	//	facebookLogin.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+	//}
+	// End Facebook onActivityResult
+				</insert>
+			</true>
+		</if>
+	</gameActivityOnActivityResultAdditions>
+
+	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
+	<soLoadLibrary>
+	</soLoadLibrary>
+</root>

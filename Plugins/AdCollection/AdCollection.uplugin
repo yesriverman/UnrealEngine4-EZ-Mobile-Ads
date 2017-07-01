@@ -1,0 +1,50 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "AdCollection",
+	"Description": "",
+	"Category": "Other",
+	"CreatedBy": "",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+  "Modules": [
+    {
+      "Name": "AdCollection",
+      "Type": "Runtime",
+      "LoadingPhase" : "PostConfigInit"
+    },
+    {
+      "Name": "Vungle",
+      "Type": "Runtime",
+      "LoadingPhase" : "PostConfigInit"
+    },
+    {
+        "Name": "Unity",
+        "Type": "Runtime",
+        "LoadingPhase" : "PostConfigInit"
+    },
+    {
+        "Name": "ChartBoost",
+        "Type": "Runtime",
+        "LoadingPhase" : "PostConfigInit"
+    },
+
+    {
+        "Name": "AdMob",
+        "Type": "Runtime",
+        "LoadingPhase" : "PostConfigInit"
+    },
+
+    {
+      "Name": "AdCollectionEditor",
+      "Type": "Editor",
+      "LoadingPhase" : "Default"
+    }
+     ]
+}
