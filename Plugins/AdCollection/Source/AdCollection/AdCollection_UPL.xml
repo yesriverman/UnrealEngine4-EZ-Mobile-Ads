@@ -44,7 +44,55 @@
 
 	<!-- optional additions to proguard -->
 	<proguardAdditions>
+    <insert>
+      # Keep filenames and line numbers for stack traces
+      -keepattributes SourceFile,LineNumberTable
 
+      # Keep JavascriptInterface for WebView bridge
+      -keepattributes JavascriptInterface
+
+      # Sometimes keepattributes is not enough to keep annotations
+      -keep class android.webkit.JavascriptInterface {
+      *;
+      }
+
+      # Keep all classes in Unity Ads package
+      -keep class com.unity3d.ads.** {
+      *;
+      }
+      -dontwarn com.unity3d.ads.**
+
+      -dontwarn com.vungle.**
+      -dontnote com.vungle.**
+      -keep class com.vungle.** { *; }
+      -keep class javax.inject.*
+      # ignore eventbus warnings
+      -dontwarn de.greenrobot.event.util.**
+      # ignore rx warnings
+      -dontwarn rx.internal.util.unsafe.**
+      # keep some important rx stuff - https://github.com/ReactiveX/RxJava/issues/3097
+      -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+      long producerIndex;
+      long consumerIndex;
+      }
+      -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+      rx.internal.util.atomic.LinkedQueueNode producerNode;
+      }
+      -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+      rx.internal.util.atomic.LinkedQueueNode consumerNode;
+      }
+      -keep class rx.schedulers.Schedulers { public static &lt;methods&gt;
+        ; }
+        -keep class rx.schedulers.ImmediateScheduler { public &lt;methods&gt;
+          ; }
+          -keep class rx.schedulers.TestScheduler { public &lt;methods&gt;; }
+-keep class rx.schedulers.Schedulers { public static ** test(); }
+
+      -keep class com.chartboost.** { *; }
+      
+      -dontwarn android.app.Activity
+
+    </insert>
 	</proguardAdditions>
 
 	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 

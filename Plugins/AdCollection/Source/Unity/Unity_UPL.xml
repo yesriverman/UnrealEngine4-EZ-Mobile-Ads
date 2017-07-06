@@ -85,7 +85,9 @@
 	<proguardAdditions>
 		<if condition="bEnabled">
 			<true>
-			</true>
+       
+
+      </true>
 		</if>
 	</proguardAdditions>
 
