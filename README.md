@@ -4,7 +4,7 @@ One line code(or blueprint) Integrates Google AdMob mediation system and other a
 EZ Mobile Ads help you easy integrates multiple ad networks for your game both Android and IOS same code, 
 By use multiple ad networks, it will  help you maximize fill rate and increase monetization.
 All features are available in C++ and Blueprint. this plugin automatic process ads reload and other detail, so
- you can easy use juse call when you need.
+ you can easy use just call when you need.
 
 # FEATURES: 
 ★ 4 best game ad networks supported (more coming soon).
