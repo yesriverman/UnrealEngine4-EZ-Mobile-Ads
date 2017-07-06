@@ -4,7 +4,7 @@ One line code(or blueprint) Integrates Google AdMob mediation system and other a
 EZ Mobile Ads help you easy integrates multiple ad networks for your game both Android and IOS same code, 
 By use multiple ad networks, it will  help you maximize fill rate and increase monetization.
 All features are available in C++ and Blueprint. this plugin automatic process ads reload and other detail, so
- you can easy use juse call when you need.
+ you can easy use just call when you need.
 
 # FEATURES: 
 ★ 4 best game ad networks supported (more coming soon).
@@ -42,7 +42,8 @@ All features are available in C++ and Blueprint. this plugin automatic process a
 
 # Install
 
-1、Copy Plugins folder to your project and compile the editor.
+1、Copy Plugins folder to your project root folder, double click to open your game project as usual, the engine will 
+ notify you to compile the plugin, confirm to compile the plugin, wait several minutes(3-5), the editor will lauched.
 
 
 # Usage
@@ -82,3 +83,12 @@ All features are available in C++ and Blueprint. this plugin automatic process a
  You can use this plugin for free during trial purpose. If it earns less than $1000 for you, you can continue to use for free.
 
 If you have monetized more than $1000 using this plugin, you are also required to: either get a commercial license ($20), or, no need pay but share 2% Ad traffic, read the [License Agreement](docs/License-Agreement.md) for details. As a commercial customer, you will be supported with high priority.
+
+# FAQ
+
+## ★ I'm not good with C++, can I use this plugin?
+
+  Yes, of course you can, use this plugin, you don't have to have C++ knowlege, and don't need recompile the all engine. 
+  
+  But you need to have visualstudio or xcode can build C++ code, just put the plugins folder under you project root folder,  
+  then double click the uproject file as usual, after several minutes(3-5), the editor will launch.
