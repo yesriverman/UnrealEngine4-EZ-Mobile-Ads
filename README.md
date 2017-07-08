@@ -75,9 +75,10 @@ All features are available in C++ and Blueprint. this plugin automatic process a
 	![ScreenShot](docs/max.PNG)
 	
 	
-# Support Email
+# Support
   
-  feixuwu@outlook.com
+  Email:feixuwu@outlook.com
+  Remote Assistance with teamviewer
   
 # License
  You can use this plugin for free during trial purpose. If it earns less than $1000 for you, you can continue to use for free.
