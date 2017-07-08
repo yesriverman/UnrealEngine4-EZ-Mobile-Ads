@@ -1,5 +1,5 @@
 # UnrealEngine4-EZ-Mobile-Ads
-One line code(or blueprint) Integrates Google AdMob mediation system and other ad networks for iOS &amp; Android.
+One line code(or blueprint) Integrates Google AdMod and other ad networks for iOS &amp; Android.
 
 EZ Mobile Ads help you easy integrates multiple ad networks for your game both Android and IOS same code, 
 By use multiple ad networks, it will  help you maximize fill rate and increase monetization.
