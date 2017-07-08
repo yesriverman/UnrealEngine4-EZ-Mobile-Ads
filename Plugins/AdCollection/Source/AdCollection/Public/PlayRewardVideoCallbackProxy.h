@@ -3,6 +3,7 @@
 #pragma once
 
 #include "AdCollectionBPLibrary.h"
+#include "AdCollection.h"
 #include "Kismet/BlueprintAsyncActionBase.h"
 #include "PlayRewardVideoCallbackProxy.generated.h"
 
