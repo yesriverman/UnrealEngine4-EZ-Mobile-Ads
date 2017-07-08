@@ -86,10 +86,13 @@
         -keep class rx.schedulers.ImmediateScheduler { public &lt;methods&gt;
           ; }
           -keep class rx.schedulers.TestScheduler { public &lt;methods&gt;; }
--keep class rx.schedulers.Schedulers { public static ** test(); }
+      -keep class rx.schedulers.Schedulers { public static ** test(); }
 
       -keep class com.chartboost.** { *; }
-      
+
+      -dontwarn org.apache.http.**
+      -dontwarn android.net.http.**
+      -dontwarn com.android.volley.**
       -dontwarn android.app.Activity
 
     </insert>
