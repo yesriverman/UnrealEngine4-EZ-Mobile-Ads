@@ -42,8 +42,10 @@ All features are available in C++ and Blueprint. this plugin automatic process a
 
 # Install
 
-1、Copy Plugins folder to your project root folder, double click to open your game project as usual, the engine will 
- notify you to compile the plugin, confirm to compile the plugin, wait several minutes(3-5), the editor will lauched.
+1、If your project is a pure blueprint project, please add an empty c++ class to the project, or else the plugin may not be compile.
+
+2、Copy Plugins folder to your project root folder, double click to open your game project as usual, the engine will 
+ notify you to compile the plugin, confirm to compile the plugin, wait several minutes(3-5), the editor will lauched. If there is  any problem(UBT is complicate, and some bugs), please contact me let me help you to fix it.
 
 
 # Usage
