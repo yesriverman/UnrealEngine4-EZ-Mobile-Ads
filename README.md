@@ -42,6 +42,10 @@ All features are available in C++ and Blueprint. this plugin automatic process a
 
 # Install
 
+Watch this video to learn how to use the plugin
+
+[![how to use this plugin](https://img.youtube.com/vi/DRtkq0ewTz4/0.jpg)](https://www.youtube.com/watch?v=DRtkq0ewTz4)
+
 1、If your project is a pure blueprint project, please add an empty c++ class to the project, or else the plugin may not be compile.
 
 2、Copy Plugins folder to your project root folder, double click to open your game project as usual, the engine will 
