@@ -46,7 +46,7 @@ Watch this video to learn how to use the plugin
 
 [![how to use this plugin](https://img.youtube.com/vi/DRtkq0ewTz4/0.jpg)](https://youtu.be/DRtkq0ewTz4)
 
-1、Please first confirm you installed visualstuido 2015 or 2017, and installed c++ compile support.
+1、Please first confirm you installed Visual Studio 2015 or 2017, and installed c++ compile support.
 
 2、If your project is a pure blueprint project, please add an empty c++ class to the project, or else the plugin may not be compiled.
 
