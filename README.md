@@ -5,6 +5,8 @@ EZ Mobile Ads help you easy integrates multiple ad networks for your game both A
 By use multiple ad networks, it will  help you maximize fill rate and increase monetization.
 All features are available in C++ and Blueprint. this plugin automatic process ads reload and other detail, so
  you can easy use just call when you need.
+ 
+Note: if you use multiple ad networks(for example 3 or 4 ad networks) in one project, you can use [this plugin](https://github.com/feixuwu/UnrealEngine4-Admob) to better manager and maximize monetization, it support more ad networks, and you can manage your ad networks dynamic(add or remove) by admob mediation system on the webpage. when you add a new ad network, you don't need to rebuild your client, it's a better choice.
 
 # FEATURES: 
 ★ 4 best game ad networks supported (more coming soon).
