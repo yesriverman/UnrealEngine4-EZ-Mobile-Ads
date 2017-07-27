@@ -5,6 +5,8 @@ EZ Mobile Ads help you easy integrates multiple ad networks for your game both A
 By use multiple ad networks, it will  help you maximize fill rate and increase monetization.
 All features are available in C++ and Blueprint. this plugin automatic process ads reload and other detail, so
  you can easy use just call when you need.
+ 
+Note: if you use multiple ad networks(for example 3 or 4 ad networks) in one project, you can use [this plugin](https://github.com/feixuwu/UnrealEngine4-Admob) to better manager and maximize monetization, it support more ad networks, and you can manage your ad networks dynamic(add or remove) by admob mediation system on the webpage. when you add a new ad network, you don't need to rebuild your client, it's a better choice.
 
 # FEATURES: 
 ★ 4 best game ad networks supported (more coming soon).
@@ -42,8 +44,16 @@ All features are available in C++ and Blueprint. this plugin automatic process a
 
 # Install
 
-1、Copy Plugins folder to your project root folder, double click to open your game project as usual, the engine will 
- notify you to compile the plugin, confirm to compile the plugin, wait several minutes(3-5), the editor will lauched.
+Watch this video to learn how to use the plugin
+
+[![how to use this plugin](https://img.youtube.com/vi/DRtkq0ewTz4/0.jpg)](https://youtu.be/DRtkq0ewTz4)
+
+1、Please first confirm you installed Visual Studio 2015 or 2017, and installed c++ compile support.
+
+2、If your project is a pure blueprint project, please add an empty c++ class to the project, or else the plugin may not be compiled.
+
+3、Copy Plugins folder to your project root folder, double click to open your game project as usual, the engine will 
+ notify you to compile the plugin, confirm to compile the plugin, wait several minutes(3-5), the editor will lauched. If there is  any problem(UBT is complicate, and some bugs), please contact me let me help you to fix it.
 
 
 # Usage
