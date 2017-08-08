@@ -16,7 +16,7 @@ Note: if you use multiple ad networks(for example 3 or 4 ad networks) in one pro
 ★  extremely easy  integrates just one line c++ code or blueprint for both IOS and Android. plugin automatic process ads reload
   and other detail.
 
-★  supoort unreal engine 4 4.15 and 4.16
+★  supoort unreal engine 4 4.15,4.16 and 4.17.
 
 ★ support via e-mail feixuwu@outlook.com
 
