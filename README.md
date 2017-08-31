@@ -68,6 +68,11 @@ Watch this video to learn how to use the plugin
 3、In blueprint Editor, when you want show show the ads, just call function "PlayRewardedVideo",  setting the ad platform Unity . 
        you can add custom event to process after user complete watched the ads video.
 	![ScreenShot](docs/call.PNG)
+	
+4、Important:Remember that admob rewarded video  does not have fill rate on adnroid in most region, this is not a bug, so I suggest people switch to this plugin
+ advance version: https://github.com/feixuwu/UnrealEngine4-Admob, try both have same API, it support admob mediation, 
+ so you can add thirdparty ad network dynamic on the google admob webpage.
+ 
 
 	  
 # Other ShowCase
