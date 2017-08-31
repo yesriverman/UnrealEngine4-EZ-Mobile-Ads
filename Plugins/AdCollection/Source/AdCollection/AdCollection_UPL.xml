@@ -18,19 +18,19 @@
 	<prebuildCopies>
 		
       <log text="Copying Admob Libs files to staging"/>
-      <copyDir src="$S(PluginDir)/ThirdParty/Android/libs"
+      <copyDir src="$S(PluginDir)/../ThirdParty/ThirdParty/Android/libs"
 				dst = "$S(BuildDir)/libs" />
 
 	</prebuildCopies>
 	
 	<!-- AAR dependencies -->
 	<AARImports>
-        <insertValue value="repository $S(PluginDir)/ThirdParty/Android/libs"/>
+        <insertValue value="repository $S(PluginDir)/../ThirdParty/ThirdParty/Android/libs"/>
 				<insertNewline/>
 				<insertValue value="com.ads.util,androidlib,1.0.0" />
 				<insertNewline/>
 
-        <insertValue value="repository $S(PluginDir)/ThirdParty/Android/libs"/>
+        <insertValue value="repository $S(PluginDir)/../ThirdParty/ThirdParty/Android/libs"/>
         <insertNewline/>
         <insertValue value="com.android, volley,1.0.0" />
         <insertNewline/>

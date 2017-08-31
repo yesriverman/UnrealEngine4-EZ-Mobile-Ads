@@ -39,8 +39,10 @@ bool FChartBoostModule::IsRewardedVideoReady()
 static void IOS_ChartBoostPlayComplete(int amount)
 {
     FChartBoostModule* pModule = FModuleManager::Get().LoadModulePtr<FChartBoostModule>(TEXT("ChartBoost") );
-    if (pModule == nullptr) return;
-    
+	if (pModule == nullptr)
+	{
+		return;
+	}
     
     FRewardedStatus status;
     status.AdType = EAdType::ChartBoost;

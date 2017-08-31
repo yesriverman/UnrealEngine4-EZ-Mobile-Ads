@@ -23,7 +23,7 @@
 		<if condition="bEnabled">
 			<true>
 				<log text="Copying Admob Java files to staging"/>
-				<copyDir src="$S(PluginDir)/ThirdParty/Android/Java"
+				<copyDir src="$S(PluginDir)../ThirdParty/ThirdParty/Android/Java"
 					dst = "$S(BuildDir)/src/com/epicgames/ue4" />
 			</true>
 		</if>
@@ -31,23 +31,12 @@
     <if condition="bEnabled">
       <true>
         <log text="Copying Admob Libs files to staging"/>
-        <copyDir src="$S(PluginDir)/ThirdParty/Android/libs"
+        <copyDir src="$S(PluginDir)../ThirdParty/ThirdParty/Android/libs"
 					dst = "$S(BuildDir)/libs" />
       </true>
     </if>
 	</prebuildCopies>
 	
-	<!-- AAR dependencies -->
-	<!-- <AARImports>
-		<if condition="bEnabled">
-			<true>
-				<insertValue value="repository $S(PluginDir)/ThirdParty/Android/NotForLicensees"/>
-				<insertNewline/>
-				<insertValue value="FacebookSDK,facebook-android-sdk,4.19.0" />
-				<insertNewline/>
-			</true>
-		</if>
-	</AARImports> -->
 
 	<!-- optional updates applied to AndroidManifest.xml -->
 	<androidManifestUpdates>
@@ -76,13 +65,6 @@
         <addAttribute tag="$RewardedVideoMetadata" name="android:value" value="$S(RewardedVideoAdUnit)"/>
         <addElement tag="application" name="RewardedVideoMetadata"/>
 
-
-        <!-- <setElement result="AdActivity" value="activity"/>
-        <addAttribute tag="$AdActivity" name="android:name" value="com.google.android.gms.ads.AdActivity"/>
-        <addAttribute tag="$AdActivity" name="android:configChanges" value="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-        <addAttribute tag="$AdActivity" name="android:theme" value="@android:style/Theme.Translucent"/>
-        <addElement tag="application" name="AdActivity"/> -->
-
         <!-- Add permissions -->
 				<addPermission android:name="android.permission.INTERNET" />
         <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
@@ -99,9 +81,6 @@
 		</if>
 	</proguardAdditions>
 
-	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 
-	<prebuildCopies>
-	</prebuildCopies> -->
 
 	<!-- optional additions to the GameActivity imports in GameActivity.java -->
 	<gameActivityImportAdditions>

@@ -17,36 +17,9 @@
 	
 	<!-- Files to copy before the build so they can be used in the build -->
 	<prebuildCopies>
-		<if condition="bEnabled">
-			<true>
-				<log text="Copying Vungle Java files to staging"/>
-				<copyDir src="$S(PluginDir)/ThirdParty/Android/Java"
-					dst = "$S(BuildDir)/src/com/epicgames/ue4" /> 	
-			</true>
-		</if>
-
-    <!-- 
-    <if condition="bEnabled">
-      <true>
-        <log text="Copying Vungle Libs files to staging"/>
-        <copyDir src="$S(PluginDir)/ThirdParty/Android/libs"
-					dst = "$S(BuildDir)/libs" />
-      </true>
-    </if>
-    -->
 	</prebuildCopies>
 	
-	<!-- AAR dependencies -->
-	<!-- <AARImports>
-		<if condition="bEnabled">
-			<true>
-				<insertValue value="repository $S(PluginDir)/ThirdParty/Android/NotForLicensees"/>
-				<insertNewline/>
-				<insertValue value="FacebookSDK,facebook-android-sdk,4.19.0" />
-				<insertNewline/>
-			</true>
-		</if>
-	</AARImports> -->
+
 
 	<!-- optional updates applied to AndroidManifest.xml -->
 	<androidManifestUpdates>
@@ -88,9 +61,6 @@
 		</if>
 	</proguardAdditions>
 
-	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 
-	<prebuildCopies>
-	</prebuildCopies> -->
 
 	<!-- optional additions to the GameActivity imports in GameActivity.java -->
 	<gameActivityImportAdditions>

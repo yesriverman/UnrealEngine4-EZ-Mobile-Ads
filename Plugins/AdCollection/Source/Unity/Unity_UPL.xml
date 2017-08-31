@@ -17,18 +17,12 @@
 	
 	<!-- Files to copy before the build so they can be used in the build -->
 	<prebuildCopies>
-		<if condition="bEnabled">
-			<true>
-				<log text="Copying Unity Java files to staging"/>
-				<copyDir src="$S(PluginDir)/ThirdParty/Android/Java"
-					dst = "$S(BuildDir)/src/com/epicgames/ue4" /> 	
-			</true>
-		</if>
+		
 
     <if condition="bEnabled">
       <true>
         <log text="Copying Unity Libs files to staging"/>
-        <copyDir src="$S(PluginDir)/ThirdParty/Android/libs"
+        <copyDir src="$S(PluginDir)/../ThirdParty/ThirdParty/Android/libs"
 					dst = "$S(BuildDir)/libs" />
       </true>
     </if>
@@ -38,7 +32,7 @@
 	<AARImports>
 		<if condition="bEnabled">
 			<true>
-				<insertValue value="repository $S(PluginDir)/ThirdParty/Android/libs"/>
+				<insertValue value="repository $S(PluginDir)../ThirdParty/ThirdParty/Android/libs"/>
 				<insertNewline/>
 				<insertValue value="com.unity3d.ads,adunit,2.1.0" />
 				<insertNewline/>
@@ -91,9 +85,6 @@
 		</if>
 	</proguardAdditions>
 
-	<!-- optional files or directories to copy or delete from Intermediate/Android/APK before ndk-build 
-	<prebuildCopies>
-	</prebuildCopies> -->
 
 	<!-- optional additions to the GameActivity imports in GameActivity.java -->
 	<gameActivityImportAdditions>

@@ -31,7 +31,6 @@ void FChartBoostModule::ShowInterstitialAd()
 	{
 		const bool bIsOptional = false;
 		static jmethodID ShowInterstitialMethod = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "AndroidThunkJava_ChartBoost_ShowInterstitialAds", "()V", bIsOptional);
-		//if (ShowInterstitialMethod == nullptr) return;
 
 		if (ShowInterstitialMethod == nullptr)
 		{
@@ -84,8 +83,10 @@ bool FChartBoostModule::IsRewardedVideoReady()
 __attribute__((visibility("default"))) extern "C" void Java_com_ads_util_ChartBoost_nativePlayRewardedComplete(JNIEnv* jenv, jobject thiz, jint amount)
 {
 	FChartBoostModule* pModule = FModuleManager::Get().LoadModulePtr<FChartBoostModule>(TEXT("ChartBoost"));
-	if (pModule == nullptr) return;
-
+	if (pModule == nullptr)
+	{
+		return;
+	}
 
 	FRewardedStatus status;
 	status.AdType = EAdType::ChartBoost;

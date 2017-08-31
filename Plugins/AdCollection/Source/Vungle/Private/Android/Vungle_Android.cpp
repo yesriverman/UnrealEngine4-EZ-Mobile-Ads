@@ -8,7 +8,6 @@
 
 DEFINE_LOG_CATEGORY_STATIC(AdCollection, Log, All);
 
-//#define CHECK_JNI_METHOD(Id) checkf(Id != nullptr, TEXT("Failed to find " #Id));
 
 void FVungleModule::PlayRewardedVideo()
 {
@@ -17,7 +16,7 @@ void FVungleModule::PlayRewardedVideo()
 	{
 		const bool bIsOptional = false;
 		static jmethodID PlayAdMethod = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "AndroidThunkJava_Vungle_PlayAd", "()Z", bIsOptional);
-		//CHECK_JNI_METHOD(PlayAdMethod);
+		
 		if (PlayAdMethod == nullptr)
 		{
 			UE_LOG(AdCollection, Error, TEXT("AndroidThunkJava_Vungle_PlayAd not found"));
@@ -52,8 +51,10 @@ bool FVungleModule::IsRewardedVideoReady()
 __attribute__((visibility("default"))) extern "C" void Java_com_ads_util_Vungle_nativePlayRewardedComplete(JNIEnv* jenv, jobject thiz)
 {
 	FVungleModule* pModule = FModuleManager::Get().LoadModulePtr<FVungleModule>(TEXT("Vungle") );
-	if (pModule == nullptr) return;
-
+	if (pModule == nullptr)
+	{
+		return;
+	}
 	
 	FRewardedStatus status;
 	status.AdType = EAdType::Vungle;

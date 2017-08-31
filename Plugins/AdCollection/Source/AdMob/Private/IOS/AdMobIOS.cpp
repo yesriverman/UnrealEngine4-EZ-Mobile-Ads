@@ -72,8 +72,10 @@ bool FAdMobModule::IsRewardedVideoReady()
 static void IOS_AdMobPlayComplete(NSString* type, int amount)
 {
     FAdMobModule* pModule = FModuleManager::Get().LoadModulePtr<FAdMobModule>(TEXT("AdMob") );
-    if (pModule == nullptr) return;
-    
+	if (pModule == nullptr)
+	{
+		return;
+	}
     
     FRewardedStatus status;
     status.AdType = EAdType::AdMob;

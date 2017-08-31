@@ -56,13 +56,13 @@ public class ChartBoost : ModuleRules
                 PublicAdditionalFrameworks.Add(
                 new UEBuildFramework(
                 "Chartboost",														// Framework name
-                "../AdCollection/ThirdPartyFrameworks/Chartboost.embeddedframework.zip")
+                "../ThirdParty/ThirdPartyFrameworks/Chartboost.embeddedframework.zip")
                 );
 
             PublicAdditionalFrameworks.Add(
             new UEBuildFramework(
             "AdsUtil",														// Framework name
-            "../AdCollection/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
+            "../ThirdParty/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
             );
 
 

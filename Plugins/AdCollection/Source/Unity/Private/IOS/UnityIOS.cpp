@@ -24,8 +24,10 @@ bool FUnityModule::IsRewardedVideoReady()
 static void IOS_UnityPlayComplete()
 {
     FUnityModule* pModule = FModuleManager::Get().LoadModulePtr<FUnityModule>(TEXT("Unity") );
-    if (pModule == nullptr) return;
-    
+	if (pModule == nullptr)
+	{
+		return;
+	}
     
     FRewardedStatus status;
     status.AdType = EAdType::Unity;

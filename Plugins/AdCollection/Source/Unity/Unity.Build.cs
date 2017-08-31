@@ -54,13 +54,13 @@ public class Unity : ModuleRules
             PublicAdditionalFrameworks.Add(
                 new UEBuildFramework(
                 "UnityAds",														// Framework name
-                "../AdCollection/ThirdPartyFrameworks/UnityAds.embeddedframework.zip")
+                "../ThirdParty/ThirdPartyFrameworks/UnityAds.embeddedframework.zip")
             );
 
             PublicAdditionalFrameworks.Add(
             new UEBuildFramework(
             "AdsUtil",														// Framework name
-            "../AdCollection/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
+            "../ThirdParty/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
             );
 
 

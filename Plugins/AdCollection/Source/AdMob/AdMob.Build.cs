@@ -55,13 +55,13 @@ public class AdMob : ModuleRules
             PublicAdditionalFrameworks.Add(
             new UEBuildFramework(
             "GoogleMobileAds",														// Framework name
-            "../AdCollection/ThirdPartyFrameworks/GoogleMobileAds.embeddedframework.zip")
+            "../ThirdParty/ThirdPartyFrameworks/GoogleMobileAds.embeddedframework.zip")
             );
 
             PublicAdditionalFrameworks.Add(
             new UEBuildFramework(
             "AdsUtil",														// Framework name
-            "../AdCollection/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
+            "../ThirdParty/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
             );
 
 

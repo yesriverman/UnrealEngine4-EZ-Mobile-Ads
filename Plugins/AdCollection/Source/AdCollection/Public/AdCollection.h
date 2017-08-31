@@ -1,4 +1,8 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
+/*
+* EZ-Mobile-Ads - unreal engine 4 ads plugin
+*
+* Copyright (C) 2017 feiwu <feixuwu@outlook.com> All Rights Reserved.
+*/
 
 #pragma once
 
@@ -55,33 +59,43 @@ class IAdModuleInterface :public IModuleInterface
 {
 public:
 
+	/**
+	* show  banner
+	* @param	pos			the position the banner will be show
+	*/
 	virtual void ShowBanner(enAdsBannerPos pos)
 	{
 	}
 
+	// hide the banner
 	virtual void HideBanner()
 	{
 	}
 
+	// play rewardedvideo ads
 	virtual void PlayRewardedVideo() 
 	{
 	}
 
+	// show interstitial ads
 	virtual void ShowInterstitialAd()
 	{
 
 	}
 
+	// check if the banner ads ready
 	virtual bool IsBannerReady()
 	{
 		return false;
 	}
 
+	// check if the intersitial ads ready
 	virtual bool IsInterstitalReady()
 	{
 		return false;
 	}
 
+	// check if the rewardedvideo ads ready 
 	virtual bool IsRewardedVideoReady()
 	{
 		return false;

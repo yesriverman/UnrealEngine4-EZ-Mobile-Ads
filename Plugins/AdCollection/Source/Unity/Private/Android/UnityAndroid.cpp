@@ -8,7 +8,6 @@
 
 DEFINE_LOG_CATEGORY_STATIC(AdCollection, Log, All);
 
-//#define CHECK_JNI_METHOD(Id) checkf(Id != nullptr, TEXT("Failed to find " #Id));
 
 void FUnityModule::PlayRewardedVideo()
 {
@@ -16,7 +15,6 @@ void FUnityModule::PlayRewardedVideo()
 	{
 		const bool bIsOptional = false;
 		static jmethodID PlayRewardVideoMethod = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "AndroidThunkJava_Unity_PlayRewardedVideo", "()V", bIsOptional);
-		//CHECK_JNI_METHOD(PlayRewardVideoMethod);
 
 		if (PlayRewardVideoMethod == nullptr)
 		{
@@ -52,8 +50,10 @@ bool FUnityModule::IsRewardedVideoReady()
 __attribute__((visibility("default"))) extern "C" void Java_com_ads_util_Unity_nativePlayRewardedComplete(JNIEnv* jenv, jobject thiz)
 {
 	FUnityModule* pModule = FModuleManager::Get().LoadModulePtr<FUnityModule>(TEXT("Unity"));
-	if (pModule == nullptr) return;
-
+	if (pModule == nullptr)
+	{
+		return;
+	}
 
 	FRewardedStatus status;
 	status.AdType = EAdType::Unity;

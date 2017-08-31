@@ -12,7 +12,10 @@ UAdCollectionBPLibrary::UAdCollectionBPLibrary(const FObjectInitializer& ObjectI
 static IAdModuleInterface* FindAdsModule(EAdType adType)
 {
 	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EAdType"), true);
-	if (!EnumPtr) return nullptr;
+	if (!EnumPtr)
+	{
+		return nullptr;
+	}
 
 	FString EnumName = EnumPtr->GetNameByValue((int64)adType).ToString();
 
@@ -50,7 +53,10 @@ void UAdCollectionBPLibrary::ShowBanner(EAdType adType, bool isOnBottom)
 	if (Module != NULL)
 	{
 		enAdsBannerPos pos = enAdsBannerPos::enAdsBannerPos_Bottom;
-		if (!isOnBottom) pos = enAdsBannerPos::enAdsBannerPos_Top;
+		if (!isOnBottom)
+		{
+			pos = enAdsBannerPos::enAdsBannerPos_Top;
+		}
 		return Module->ShowBanner(pos);
 	}
 }

@@ -1,4 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+* EZ-Mobile-Ads - unreal engine 4 ads plugin
+*
+* Copyright (C) 2017 feiwu <feixuwu@outlook.com> All Rights Reserved.
+*/
+
 
 #pragma once
 
@@ -13,17 +18,19 @@ class UVungleSetting : public UObject
 {
 	GENERATED_BODY()
 	
-	
-		UPROPERTY(Config, EditAnywhere, Category = Android, Meta = (DisplayName = "If Is Vungle Android Enable"))
-		bool bAndroidEnabled;
+	// if the android vungle ads enable
+	UPROPERTY(Config, EditAnywhere, Category = Android, Meta = (DisplayName = "If Is Vungle Android Enable"))
+	bool bAndroidEnabled;
 
+	// the android vungle appid
 	UPROPERTY(Config, EditAnywhere, Category = Android, Meta = (DisplayName = "Vungle Android AppID"))
-		FString AndroidAppId;
+	FString AndroidAppId;
 
-    
+    // if the ios vungle ads enable
     UPROPERTY(Config, EditAnywhere, Category = IOS, Meta = (DisplayName = "If Is Vungle IOS Enable"))
     bool bIOSEnabled;
     
+	// the ios vungle appid
     UPROPERTY(Config, EditAnywhere, Category = IOS, Meta = (DisplayName = "Vungle IOS AppID"))
     FString IOSAppId;
 

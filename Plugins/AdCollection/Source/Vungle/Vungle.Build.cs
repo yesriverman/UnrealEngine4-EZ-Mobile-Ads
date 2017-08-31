@@ -71,13 +71,13 @@ public class Vungle : ModuleRules
             PublicAdditionalFrameworks.Add(
                 new UEBuildFramework(
                 "VungleSDK",														// Framework name
-                "../AdCollection/ThirdPartyFrameworks/VungleSDK.embeddedframework.zip")
+                "../ThirdParty/ThirdPartyFrameworks/VungleSDK.embeddedframework.zip")
             );
 
             PublicAdditionalFrameworks.Add(
                 new UEBuildFramework(
                 "AdsUtil",														// Framework name
-                "../AdCollection/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
+                "../ThirdParty/ThirdPartyFrameworks/AdsUtil.embeddedframework.zip")
             );
 
 
