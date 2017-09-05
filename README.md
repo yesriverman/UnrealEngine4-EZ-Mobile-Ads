@@ -108,3 +108,11 @@ If you have monetized more than $1000 using this plugin, you are also required t
   
   But you need to have visualstudio or xcode can build C++ code, just put the plugins folder under you project root folder,  
   then double click the uproject file as usual, after several minutes(3-5), the editor will launch.
+  
+## ★ If I use in project with engine version 4.17, it will remind me the plugin is not compatible with engine, is there compatible problem?
+
+ No, after do some debug and read 4.17 source, I found it's the engine bug, all the plugin without binary will get the warning.
+ There's a engine bug report here: https://issues.unrealengine.com/issue/UE-49007
+ 
+ So after the engine remind you if disable the plugin, click no, and then confirm to build the plugin, next time to start the project,
+ the warning will dissappear.
