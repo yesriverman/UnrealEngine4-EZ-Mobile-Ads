@@ -1,4 +1,8 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
+/*
+* EZ-Mobile-Ads - unreal engine 4 ads plugin
+*
+* Copyright (C) 2017 feiwu <feixuwu@outlook.com> All Rights Reserved.
+*/
 
 #include "Vungle.h"
 

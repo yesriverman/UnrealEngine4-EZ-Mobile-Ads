@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ EZ-Mobile-Ads - unreal engine 4 ads plugin
+ Copyright (C) 2017 feiwu <feixuwu@outlook.com> All Rights Reserved.
+-->
 <!--Admob plugin additions-->
 <root xmlns:android="http://schemas.android.com/apk/res/android">
 	<!-- init section is always evaluated once per architecture -->

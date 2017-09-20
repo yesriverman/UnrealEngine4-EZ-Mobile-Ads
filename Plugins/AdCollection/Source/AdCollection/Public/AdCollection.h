@@ -55,6 +55,9 @@ public: \
 		DelegateName##Delegates.Broadcast(Param1); \
 	}
 
+/**
+ *	IAdModuleInterface - interface to support mutiple ad networks, every ad network should implement this interface.
+ */
 class IAdModuleInterface :public IModuleInterface
 {
 public:

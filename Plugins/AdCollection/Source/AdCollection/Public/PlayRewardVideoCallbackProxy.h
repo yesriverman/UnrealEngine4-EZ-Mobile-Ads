@@ -12,7 +12,7 @@
 #include "PlayRewardVideoCallbackProxy.generated.h"
 
 /**
- * 
+ * Async play rewarded video action, when play finished success, the OnSuccess will be called.
  */
 UCLASS(MinimalAPI)
 class  UPlayRewardVideoCallbackProxy : public UBlueprintAsyncActionBase
@@ -22,6 +22,10 @@ class  UPlayRewardVideoCallbackProxy : public UBlueprintAsyncActionBase
 public:
 
 	UPlayRewardVideoCallbackProxy();
+
+	/**
+	* Called when the Rewarded video ads complete
+	*/
 	UPROPERTY(BlueprintAssignable)
 	FPlayRewardedDelegate OnSuccess;
 
@@ -41,6 +45,9 @@ public:
 	*/
 	static IAdModuleInterface* FindAdsModule(EAdType adType);
 
+	/**
+	* ad network type the ads belong
+	*/
 	EAdType AdType;
 	
 private:
